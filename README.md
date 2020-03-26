@@ -1,5 +1,5 @@
 # SurveySystem-Nukkit
-Download: Available soon
+Download: https://nukkitx.com/resources/surveysystem.409/
 
 # Thanks to ZAP-Hosting!
 This project wouldn't be possible without the help of ZAP-Hosting!
