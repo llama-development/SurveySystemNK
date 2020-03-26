@@ -51,8 +51,9 @@ public class MongoDBManager extends ProviderManager {
 
     @Override
     public void createSurvey(String title, String text, int time) {
+        int seconds = time * 3600;
         long current = System.currentTimeMillis();
-        long end = current + time * 1000L;
+        long end = current + seconds * 1000L;
         Document document = new Document("title", title)
                 .append("text", text)
                 .append("status", "Open")
@@ -81,10 +82,12 @@ public class MongoDBManager extends ProviderManager {
     }
 
     @Override
-    public void checkSurvey(String id) {
-        SurveyUtil surveyUtil = getSurvey(id);
-        if (surveyUtil.getTime() < System.currentTimeMillis()) {
-            closeSurvey(id);
+    public void checkSurvey() {
+        for (Document doc : surveyCollection.find()) {
+            SurveyUtil surveyUtil = getSurvey(doc.getString("id"));
+            if (surveyUtil.getTime() < System.currentTimeMillis()) {
+                closeSurvey(surveyUtil.getId());
+            }
         }
     }
 

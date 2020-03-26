@@ -32,7 +32,7 @@ public class ProviderManager {
 
     }
 
-    public void checkSurvey(String id) {
+    public void checkSurvey() {
 
     }
 

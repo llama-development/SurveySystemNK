@@ -24,9 +24,9 @@ public class YamlManager extends ProviderManager {
         List<String> list = new ArrayList<String>();
         List<String> list2 = survey.getStringList("Opened");
         list2.add(id);
+        int seconds = time * 3600;
         long current = System.currentTimeMillis();
-        long end = current + time * 1000L;
-        if (time == -1) end = -1L;
+        long end = current + seconds * 1000L;
         survey.set("Survey." + id + ".Title", title);
         survey.set("Survey." + id + ".Text", text);
         survey.set("Survey." + id + ".Status", "Open");
@@ -113,11 +113,11 @@ public class YamlManager extends ProviderManager {
     }
 
     @Override
-    public void checkSurvey(String id) {
+    public void checkSurvey() {
         Config survey = new Config(SurveySystem.getInstance().getDataFolder() + "/data/survey-data.yml", Config.YAML);
-        long f = survey.getLong("Survey." + id + ".Time");
-        if (f < System.currentTimeMillis()) {
-            closeSurvey(id);
+        for (String s : survey.getStringList("Opened")) {
+            long f = survey.getLong("Survey." + s + ".Time");
+            if (f < System.currentTimeMillis()) closeSurvey(s);
         }
     }
 

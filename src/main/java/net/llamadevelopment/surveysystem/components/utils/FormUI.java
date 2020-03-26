@@ -29,7 +29,6 @@ public class FormUI {
     public static HashMap<Player, String> surveyOpenCache = new HashMap<Player, String>();
 
     public static void openSurveys(Player player) {
-        for (String s : config.getStringList("Opened")) provider.checkSurvey(s);
         FormWindowSimple surveyForm = new FormWindowSimple(config.getString("Ui.Title.Surveys"), config.getString("Ui.Text.Surveys"));
         int count = 0;
         if (provider.getProvider().equalsIgnoreCase("MongoDB")) {

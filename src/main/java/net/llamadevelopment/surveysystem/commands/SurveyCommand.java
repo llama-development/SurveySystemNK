@@ -16,6 +16,7 @@ public class SurveyCommand extends CommandManager {
 
     public boolean execute(CommandSender sender, String s, String[] args) {
         if (sender instanceof Player) {
+            SurveySystem.provider.checkSurvey();
             FormUI.openSurveys((Player) sender);
         }
         return false;

@@ -74,8 +74,9 @@ public class MySqlManager extends ProviderManager {
 
     @Override
     public void createSurvey(String title, String text, int time) {
+        int seconds = time * 3600;
         long current = System.currentTimeMillis();
-        long end = current + time * 1000L;
+        long end = current + seconds * 1000L;
         update("INSERT INTO surveys (TITLE, TEXT, STATUS, ID, TIME, YES, NO, TOTAL, PLAYERS) VALUES ('" + title + "', '" + text + "', 'Open', '" + SurveySystem.getInstance().getSurveyID() + "', '" + end + "', '0', '0', '0', '');");
     }
 
@@ -96,10 +97,18 @@ public class MySqlManager extends ProviderManager {
     }
 
     @Override
-    public void checkSurvey(String id) {
-        SurveyUtil surveyUtil = getSurvey(id);
-        if (surveyUtil.getTime() < System.currentTimeMillis()) {
-            closeSurvey(id);
+    public void checkSurvey() {
+        try {
+            PreparedStatement preparedStatement = MySqlManager.getConnection().prepareStatement("SELECT * FROM surveys");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                SurveyUtil surveyUtil = getSurvey(rs.getString("ID"));
+                if (surveyUtil.getTime() < System.currentTimeMillis()) {
+                    closeSurvey(surveyUtil.getId());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
