@@ -1,0 +1,46 @@
+# - - - Messages - - -
+prefix: "&8» &bSurvey &8| &7"
+permission.insufficient: "&cYou have insufficient permissions to execute this command."
+
+invalid.input: "&cYour input is invalid. Please check again."
+survey.exists: "&cA survey by this title already exists."
+survey.created: "&aYou successfully created a survey! &7[0]"
+survey.deleted: "&aYou successfully deleted the survey: &7[0]"
+survey.voted.for: "&aYou voted for this survey."
+survey.voted.against: "&cYou against for this survey."
+
+# - - - Form UI - - -
+ui.back: "&8» &cBack"
+
+surveys.title: "Open surveys"
+surveys.content: "Click on a survey to vote."
+surveys.button: "&8» &9[0]"
+
+survey.content: "[0]"
+survey.vote.yes: "&8» &aVote for"
+survey.vote.no: "&8» &4Vote against"
+
+adminpanel.title: "Admin panel"
+adminpanel.content: ""
+adminpanel.create: "&8» &6Create survey"
+adminpanel.delete: "&8» &gDelete survey"
+adminpanel.closed: "&8» &eClosed surveys"
+
+create.title: "Create survey"
+create.survey.title: "Please provide the title of your survey."
+create.survey.title.placeholder: "SkyWars survey"
+create.survey.text: "Specify a question to which you can answer with yes or no."
+create.survey.text.placeholder: "Should we add SkyWars?"
+create.survey.hours: "How long should the survey run? (Hours)"
+create.survey.hours.placeholder: "3"
+
+delete.title: "Delete survey"
+delete.content: "Click on an entry to delete it."
+delete.confirm.title: "Delete survey?"
+delete.confirm.content: "&cDo you want to delete this survey? This action can not be undone."
+delete.confirm.delete: "&8» &aDelete"
+
+closed.title: "Closed surveys"
+closed.content: "Click on a closed survey to see the result."
+
+results.content: "&8» &9Text: &b[0]\n&8» &9ID: &b[1]\n&8» &9Status: &b[2]\n&8» &9Votings for: &b[3]\n&8» &9Votings against: &b[4]"

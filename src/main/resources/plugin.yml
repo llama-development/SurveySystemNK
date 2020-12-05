@@ -1,0 +1,6 @@
+name: SurveySystem
+version: 2.0.0-SNAPSHOT
+api: 1.0.0
+author: Mundschutziii
+main: net.lldv.surveysystem.SurveySystem
+description: Create surveys and get result

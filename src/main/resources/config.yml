@@ -1,56 +1,23 @@
 Provider: Yaml
+
 MySql:
   Host: "127.0.0.1"
   Port: "3306"
   Database: "surveysystem"
   User: "root"
-  Password: "cheesecake"
+  Password: "biden2020"
+
 MongoDB:
-  Uri: ""
+  Uri: "URI_LINK"
   Database: "surveysystem"
 
-Messages:
-  Prefix: "&8» &9SurveySystem &8| &7"
-  NoPermission: "&cYou have insufficient permissions to execute this command."
-  SurveyCreated: "&aYou successfully created a survey with the title &7[0]&a."
-  TimeMustNumber: "&cThe time must be a valid number."
-  SurveyExists: "&cA survey with this title already exists."
-  SurveyDeleted: "&aYou successfully deleted the survey."
-  VotedYes: "&aYou successfully voted yes on survey &7[0]&a. Thank you!"
-  VotedNo: "&aYou successfully voted no on survey &7[0]&a. Thank you!"
-
-Ui:
-  Button:
-    Close: "Close"
-    Back: "Back"
-    NothingToDisplay: "§cThere are no surveys available"
-    VoteYes: "§aVote for yes"
-    VoteNo: "§cVote for no"
-    Management: "Survey Management"
-    CreateSurvey: "Create new survey"
-    DeleteSurvey: "Delete a survey"
-    ClosedSurveys: "All closed surveys"
-    Delete: "Delete this survey"
-  Text:
-    Surveys: "Here are all running surveys. Click on a survey to vote for that question."
-    Survey: "&bTitle: &7[0]\n&bQuestion: &7[1]"
-    Management: "Here you can create, delete and get result of surveys."
-    CreateTitle: "Please provide the title of your survey."
-    CreateQuestion: "Please provide the question of your survey. The best answer to this question must be yes or no."
-    CreateTime: "Please enter the time in hours how long this survey should run."
-    DeleteSurvey: "You can only delete closed surveys."
-    DeleteConfirm: "Dou you want to delete this survey?"
-    ClosedSurveys: "Click on a survey to see the result."
-    Result: "&bTitle: &7[0]\n&bQuestion: &7[1]\n&bAll votes: &7[2]\n&bYes votes: &a[3]\n&bNo votes: &c[4]\n&bStatus: &7[5]\n&bID: &7[6]"
-  Title:
-    Surveys: "All running surveys"
-    Management: "Survey Management"
-    CreateSurvey: "Create new Survey"
-    DeleteSurvey: "Delete a survey"
-    DeleteConfirm: "Delete confirmation"
-    ClosedSurveys: "All closed surveys"
-
 Commands:
-  Survey: survey
-
-ConfigVersion: 1
+  Survey:
+    Name: "survey"
+    Description: "Vote for running surveys"
+    Aliases: [ "poll" ]
+  Surveyadmin:
+    Name: "surveyadmin"
+    Description: "Manage all surveys"
+    Permission: "survey.command.surveyadmin"
+    Aliases: [ "sadmin" ]
