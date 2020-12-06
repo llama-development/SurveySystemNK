@@ -3,6 +3,7 @@ package net.lldv.surveysystem.components.forms;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementInput;
+import cn.nukkit.level.Sound;
 import lombok.AllArgsConstructor;
 import net.lldv.surveysystem.components.data.Survey;
 import net.lldv.surveysystem.components.forms.custom.CustomForm;
@@ -36,11 +37,13 @@ public class FormWindows {
                     if (survey.getStatus() != Survey.Status.OPEN) return;
                     this.provider.updateSurvey(survey.getId(), player.getName(), true);
                     player.sendMessage(Language.get("survey.voted.for"));
+                    this.provider.playSound(player, Sound.NOTE_PLING);
                 });
                 form.addButton(new ElementButton(Language.getNP("survey.vote.no")), e -> {
                     if (survey.getStatus() != Survey.Status.OPEN) return;
                     this.provider.updateSurvey(survey.getId(), player.getName(), false);
                     player.sendMessage(Language.get("survey.voted.against"));
+                    this.provider.playSound(player, Sound.NOTE_PLING);
                 });
                 form.addButton(new ElementButton(Language.getNP("ui.back")), e -> this.openSurveys(player));
                 form.build().send(player);
@@ -79,19 +82,23 @@ public class FormWindows {
                     String hours = k.getInputResponse(2);
                     if (title.isEmpty() || text.isEmpty() || hours.isEmpty()) {
                         player.sendMessage(Language.get("invalid.input"));
+                        this.provider.playSound(player, Sound.NOTE_BASS);
                         return;
                     }
                     this.provider.surveyExists(title, exists -> {
                         if (exists) {
                             player.sendMessage(Language.get("survey.exists"));
+                            this.provider.playSound(player, Sound.NOTE_BASS);
                             return;
                         }
                         try {
                             long time = Integer.parseInt(hours);
                             this.provider.createSurvey(title, text, time);
                             player.sendMessage(Language.get("survey.created", title));
+                            this.provider.playSound(player, Sound.RANDOM_LEVELUP);
                         } catch (NumberFormatException e) {
                             player.sendMessage(Language.get("invalid.input"));
+                            this.provider.playSound(player, Sound.NOTE_BASS);
                         }
                     });
                 })
@@ -109,6 +116,7 @@ public class FormWindows {
                             .onYes(k -> {
                                 this.provider.deleteSurvey(survey.getId());
                                 player.sendMessage(Language.get("survey.deleted", survey.getId()));
+                                this.provider.playSound(player, Sound.RANDOM_LEVELUP);
                             })
                             .onNo(g -> this.openDeleteMenu(player))
                             .build();

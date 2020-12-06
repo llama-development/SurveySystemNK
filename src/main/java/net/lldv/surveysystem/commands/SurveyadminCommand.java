@@ -3,6 +3,7 @@ package net.lldv.surveysystem.commands;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.PluginCommand;
+import cn.nukkit.level.Sound;
 import net.lldv.surveysystem.SurveySystem;
 import net.lldv.surveysystem.components.language.Language;
 
@@ -20,7 +21,10 @@ public class SurveyadminCommand extends PluginCommand<SurveySystem> {
         if (sender instanceof Player) {
             if (sender.hasPermission(this.getPermission())) {
                 SurveySystem.getApi().getFormWindows().openAdminPanel(((Player) sender).getPlayer());
-            } else sender.sendMessage(Language.get("permission.insufficient"));
+            } else {
+                sender.sendMessage(Language.get("permission.insufficient"));
+                this.getPlugin().provider.playSound((Player) sender, Sound.NOTE_BASS);
+            }
         }
         return true;
     }
