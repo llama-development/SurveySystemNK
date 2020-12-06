@@ -17,11 +17,13 @@ public class YamlProvider extends Provider {
         CompletableFuture.runAsync(() -> {
             instance.saveResource("/data/survey_data.yml");
             this.surveyData = new Config(instance.getDataFolder() + "/data/survey_data.yml", Config.YAML);
-            instance.getLogger().info("[Configuration] Ready.");
 
             this.surveyData.getSection("survey").getAll().getKeys(false).forEach(s -> this.getSurvey(s, survey -> {
                 this.surveyMap.put(this.surveyData.getString("survey." + s + ".title"), survey);
             }));
+
+            this.reloadSurveyData();
+            instance.getLogger().info("[Configuration] Ready.");
         });
     }
 

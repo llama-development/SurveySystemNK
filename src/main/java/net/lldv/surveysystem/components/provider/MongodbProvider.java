@@ -29,6 +29,8 @@ public class MongodbProvider extends Provider {
             for (Document document : this.surveyData.find()) {
                 this.getSurvey(document.getString("id"), survey -> this.surveyMap.put(document.getString("title"), survey));
             }
+
+            this.reloadSurveyData();
             instance.getLogger().info("[MongoClient] Connection opened.");
         });
     }

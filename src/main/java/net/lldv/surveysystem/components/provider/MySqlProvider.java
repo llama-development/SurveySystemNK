@@ -40,6 +40,7 @@ public class MySqlProvider extends Provider {
                     this.surveyMap.put(sqlDocument.getString("title"), survey);
                 }));
 
+                this.reloadSurveyData();
                 instance.getLogger().info("[MySqlClient] Connection opened.");
             } catch (Exception e) {
                 e.printStackTrace();
