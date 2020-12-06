@@ -52,8 +52,6 @@ public class SurveySystem extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new FormListener(), this);
         this.getServer().getCommandMap().register("surveysystem", new SurveyCommand(this));
         this.getServer().getCommandMap().register("surveysystem", new SurveyadminCommand(this));
-
-
     }
 
     @Override

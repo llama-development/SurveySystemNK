@@ -9,14 +9,23 @@ survey.deleted: "&aYou successfully deleted the survey: &7[0]"
 survey.voted.for: "&aYou voted for this survey."
 survey.voted.against: "&cYou against for this survey."
 
+time.day: "day"
+time.days: "days"
+time.hour: "hour"
+time.hours: "hours"
+time.minute: "minute"
+time.minutes: "minutes"
+time.seconds: "Some seconds"
+
 # - - - Form UI - - -
 ui.back: "&8» &cBack"
 
 surveys.title: "Open surveys"
 surveys.content: "Click on a survey to vote."
-surveys.button: "&8» &9[0]"
+surveys.button: "&8» &9[0]\n&7[1]"
 
-survey.content: "[0]"
+survey.content: "[0]\n§3\n§3\n&8» &9Remaining time: &b[1]"
+survey.content.voted: "[0]\n\n§3\n§3\n&8» &9Votings for: &b[1]\n&8» &9Votings against: &b[2]\n&8» &9Remaining time: &b[3]"
 survey.vote.yes: "&8» &aVote for"
 survey.vote.no: "&8» &4Vote against"
 

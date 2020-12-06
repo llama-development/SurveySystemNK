@@ -22,7 +22,7 @@ public class FormWindows {
         this.provider.reloadSurveyData();
         SimpleForm.Builder form = new SimpleForm.Builder(Language.getNP("surveys.title"), Language.getNP("surveys.content"));
         this.provider.surveyMap.forEach((title, survey) -> {
-            if (survey.getStatus() == Survey.Status.OPEN) form.addButton(new ElementButton(Language.getNP("surveys.button", title)), e -> this.openSurvey(player, survey.getId()));
+            if (survey.getStatus() == Survey.Status.OPEN) form.addButton(new ElementButton(Language.getNP("surveys.button", title, this.provider.getRemainingTime(survey.getTime()))), e -> this.openSurvey(player, survey.getId()));
         });
         form.build().send(player);
     }
@@ -30,19 +30,31 @@ public class FormWindows {
     public void openSurvey(final Player player, final String id) {
         this.provider.reloadSurveyData();
         this.provider.getSurvey(id, survey -> {
-            SimpleForm.Builder form = new SimpleForm.Builder(survey.getTitle(), Language.getNP("survey.content", survey.getText()));
             if (!survey.getVotedPlayers().containsKey(player.getName())) {
+            SimpleForm.Builder form = new SimpleForm.Builder(survey.getTitle(), Language.getNP("survey.content", survey.getText(), this.provider.getRemainingTime(survey.getTime())));
                 form.addButton(new ElementButton(Language.getNP("survey.vote.yes")), e -> {
+                    if (survey.getStatus() != Survey.Status.OPEN) return;
                     this.provider.updateSurvey(survey.getId(), player.getName(), true);
                     player.sendMessage(Language.get("survey.voted.for"));
                 });
                 form.addButton(new ElementButton(Language.getNP("survey.vote.no")), e -> {
+                    if (survey.getStatus() != Survey.Status.OPEN) return;
                     this.provider.updateSurvey(survey.getId(), player.getName(), false);
                     player.sendMessage(Language.get("survey.voted.against"));
                 });
+                form.addButton(new ElementButton(Language.getNP("ui.back")), e -> this.openSurveys(player));
+                form.build().send(player);
+            } else {
+                AtomicInteger i = new AtomicInteger();
+                AtomicInteger h = new AtomicInteger();
+                survey.getVotedPlayers().forEach((key, value) -> {
+                    if (value == 1) i.getAndIncrement();
+                    else h.getAndIncrement();
+                });
+                SimpleForm.Builder form = new SimpleForm.Builder(survey.getTitle(), Language.getNP("survey.content.voted", survey.getText(), i.get(), h.get(), this.provider.getRemainingTime(survey.getTime())));
+                form.addButton(new ElementButton(Language.getNP("ui.back")), e -> this.openSurveys(player));
+                form.build().send(player);
             }
-            form.addButton(new ElementButton(Language.getNP("ui.back")), e -> this.openSurveys(player));
-            form.build().send(player);
         });
     }
 
